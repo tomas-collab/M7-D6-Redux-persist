@@ -2,21 +2,23 @@
 import {Card, ListGroup,Button} from 'react-bootstrap'
 import { BrowserRouter } from 'react-router-dom'
 import { withRouter } from 'react-router'
-import { connect } from 'react-redux'
+import { connect,useSelector,useDispatch } from 'react-redux'
 import { addToFavoritesAction, addToFavoritesActionThunk } from "../actions"
 import Favorites from './Favorites'
 import {AiFillStar} from 'react-icons/ai'
 
-const mapStateToProps = state => state
- const mapDispatchToProps = dispatch => ({
-        addToFavorites: (companyToAdd) => dispatch(addToFavoritesActionThunk(companyToAdd)),
-      })
+// const mapStateToProps = state => state
+//  const mapDispatchToProps = dispatch => ({
+//         addToFavorites: (companyToAdd) => dispatch(addToFavoritesActionThunk(companyToAdd)),
+//       })
 
 const JobCard =({addToFavorites, favorite,history,category,job_type,publication_date,salary,title,url,company_name})=>{
   
+    const state = useSelector(state => state)
+    const dispatch = useDispatch()
 // const isFav = favorite.includes(company_name)
 const toggleFavorite = ()=>{
-    addToFavorites(company_name)
+    dispatch(addToFavorites(company_name))
 }
 
 
@@ -37,5 +39,5 @@ const toggleFavorite = ()=>{
     )
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(withRouter(JobCard))
+export default withRouter(JobCard)
 

@@ -2,21 +2,23 @@ import { useState,useEffect } from 'react'
 import {Form, FormControl, ListGroup,Col,Row, Container} from 'react-bootstrap'
 import CompanyDetail from './CompanyDetail'
 import HomePage from './HomePage'
-import { connect } from 'react-redux'
+import { connect,useSelector,useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fillJobAction } from '../actions'
 
 
-const mapStateToProps = (state)=>state
+// const mapStateToProps = (state)=>state
   
   // favLength: state.favorite.company.length
 
 
-const mapDispatchToProps =dispatch=>({
-       fetchData:(search)=>dispatch(fillJobAction(search))
+// const mapDispatchToProps =dispatch=>({
+//        fetchData:(search)=>dispatch(fillJobAction(search))
        
-})
-const SearchJob =({fetchData,favLength,...props})=>{
+// })
+const SearchJob =({...props})=>{
+ const state = useSelector(state => state)
+ const dispatch = useDispatch()
 
     const [search, setSearch] = useState('')
   
@@ -33,7 +35,7 @@ const SearchJob =({fetchData,favLength,...props})=>{
                               value={search}
                               onChange={(e)=>{
                                 setSearch(e.currentTarget.value.toLowerCase()) 
-                                fetchData(e.currentTarget.value.toLowerCase())                               
+                                dispatch(fillJobAction(e.currentTarget.value.toLowerCase()))                              
                                 }}/>                              
                       </Form>  
                   <span className="ml-2">FAV:{favLength}</span>
@@ -55,4 +57,4 @@ const SearchJob =({fetchData,favLength,...props})=>{
     
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(SearchJob)
+export default SearchJob
