@@ -4,6 +4,8 @@ import thunk from "redux-thunk";
 import jobsReducer from "../reducer/jobs";
 import storage from 'redux-persist/lib/storage' 
 import { persistStore,persistReducer } from "redux-persist";
+import {encryptTransform} from 'redux-persist-transform-encrypt'
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
 
 export const initialState = {
@@ -19,7 +21,12 @@ export const initialState = {
 
 const persistConfig = {
     key:'root',
-    storage
+    storage,
+    transforms:[
+        encryptTransform({
+            secretKey: process.env.REACT_APP_ENCRYPT_KEY 
+        })
+    ]
 }
 const bigReducer = combineReducers({
     favorite:favoriteReducer,
