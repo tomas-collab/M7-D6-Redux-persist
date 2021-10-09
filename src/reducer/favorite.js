@@ -14,7 +14,6 @@ const favoriteReducer = (state=initialState.favorite,action)=>{
                 }
          default:
                 return state
-               
        }
 }
 // console.log('check' ,state,action )

@@ -21,12 +21,15 @@ const SearchJob =({...props})=>{
  const dispatch = useDispatch()
 
     const [search, setSearch] = useState('')
+
+
+   
   
         console.log('test',props)
         return(
             <Container className="">
             <Row xs={10} className='mx-auto mb-5'>
-                      <Form onSubmit={fetchData}>
+                      <Form onSubmit={dispatch(fillJobAction())}>
                           <p className="my-3 search-job">SEARCH JOBS</p>
                           <FormControl 
                               placeholder='Search jobs'
@@ -38,7 +41,7 @@ const SearchJob =({...props})=>{
                                 dispatch(fillJobAction(e.currentTarget.value.toLowerCase()))                              
                                 }}/>                              
                       </Form>  
-                  <span className="ml-2">FAV:{favLength}</span>
+                  <span className="ml-2">FAV:{props.favLength}</span>
                   <Link to='/favorite'>Favorite</Link>
              </Row>
 

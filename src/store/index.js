@@ -6,6 +6,7 @@ import storage from 'redux-persist/lib/storage'
 import { persistStore,persistReducer } from "redux-persist";
 import {encryptTransform} from 'redux-persist-transform-encrypt'
 
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
 
 export const initialState = {
@@ -29,13 +30,13 @@ const persistConfig = {
     ]
 }
 const bigReducer = combineReducers({
-    favorite:favoriteReducer,
-    jobs:jobsReducer
+      favorite:favoriteReducer,
+      jobs:jobsReducer
 })
 
-const persistReducer = persistReducer(persistConfig,bigReducer)
+const persistedReducer = persistReducer(persistConfig,bigReducer)
 export const configureStore = createStore(
-    persistReducer,
+    persistedReducer,
     initialState,
     process.env.REACT_APP_DEVELOPMENT? composeEnhancers(applyMiddleware(thunk)):compose(applyMiddleware(thunk))
   )
