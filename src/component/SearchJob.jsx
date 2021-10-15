@@ -38,7 +38,7 @@ const SearchJob =({...props})=>{
                               value={search}
                               onChange={(e)=>{
                                 setSearch(e.currentTarget.value.toLowerCase()) 
-                                dispatch(fillJobAction(e.currentTarget.value.toLowerCase()))                              
+                                dispatch()                              
                                 }}/>                              
                       </Form>  
                   <span className="ml-2">FAV:{props.favLength}</span>
